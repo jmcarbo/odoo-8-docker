@@ -1,6 +1,7 @@
 #FROM debian:jessie
 FROM ubuntu:16.04
 MAINTAINER Odoo S.A. <info@odoo.com>
+LABEL org.opencontainers.image.source https://github.com/jmcarbo/odoo-8-docker
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -x; \

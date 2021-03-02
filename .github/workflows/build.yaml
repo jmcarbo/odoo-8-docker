@@ -51,4 +51,4 @@ jobs:
       - 
         name: Build docker images
         run: |
-          docker buildx build --push --platform linux/amd64,linux/arm64 -t ghcr.io/odoo8:${{ steps.get_version.outputs.VERSION }} --file ./Dockerfile .
+          docker buildx build --push --platform linux/amd64,linux/arm64 -t ghcr.io/jmcarbo/odoo8:${{ steps.get_version.outputs.VERSION }} --file ./Dockerfile .
