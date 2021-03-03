@@ -2,18 +2,23 @@
 FROM ubuntu:16.04
 MAINTAINER Odoo S.A. <info@odoo.com>
 LABEL org.opencontainers.image.source https://github.com/jmcarbo/odoo-8-docker
-
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+ARG TARGETARCH
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN set -x; \
         apt-get update \
         && apt-get install -y --no-install-recommends \
             ca-certificates \
             curl \
+            wget \
             node-less \
             node-clean-css \
             python-pyinotify 
             #python-renderpm 
-
+RUN wget -O wkhtmltox.deb  "https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_$TARGETARCH.deb" \
+        && dpkg --force-depends -i wkhtmltox.deb \
+        && apt-get -y install -f --no-install-recommends 
 #            python-support \
 #      && curl -o wkhtmltox.deb -SL http://nightly.odoo.com/extra/wkhtmltox-0.12.1.2_linux-jessie-amd64.deb \
 #        && echo '40e8b906de658a2221b15e4e8cd82565a47d7ee8 wkhtmltox.deb' | sha1sum -c - \
